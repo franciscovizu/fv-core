@@ -17,10 +17,16 @@ class DuplicateDetector:
     def __init__(self, existing_uuids: Iterable[str] = ()) -> None:
         self._seen = set(existing_uuids)
 
-    def ensure_unique(self, uuid: str) -> None:
+    def check_available(self, uuid: str) -> None:
         if uuid in self._seen:
             raise DuplicateCFDIError(f"CFDI with UUID {uuid} is already registered")
+
+    def register(self, uuid: str) -> None:
         self._seen.add(uuid)
+
+    def ensure_unique(self, uuid: str) -> None:
+        self.check_available(uuid)
+        self.register(uuid)
 
 
 def validate_metadata(metadata: CfdiMetadata) -> None:

@@ -21,7 +21,7 @@ class FiscalEventFactory:
     ) -> FiscalEvent:
         operation_id = new_operation_id(self.config.fv_id)
         document_sha = sha256_bytes(original_document)
-        event_id = f"fiscal-event-{metadata.uuid}"
+        event_id = f"fiscal-event-{metadata.uuid}-{operation_id}"
         audit = build_audit_record(
             operation_id=operation_id,
             origin=source,

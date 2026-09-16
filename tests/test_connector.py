@@ -6,6 +6,7 @@ import tempfile
 import unittest
 
 from fv_sat_connector import SATConnectorService
+from fv_sat_connector.validator import DuplicateDetector
 from fv_sat_connector.validator import DuplicateCFDIError
 
 
@@ -72,6 +73,24 @@ class SATConnectorServiceTest(unittest.TestCase):
 
         with self.assertRaises(DuplicateCFDIError):
             service.ingest_cfdi(SAMPLE_XML)
+
+    def test_storage_failure_does_not_mark_uuid_as_duplicate(self) -> None:
+        class FailingStorage:
+            def persist(self, event, original_document) -> None:
+                raise RuntimeError("storage unavailable")
+
+        detector = DuplicateDetector()
+        failing_service = SATConnectorService(
+            duplicate_detector=detector,
+            storage=FailingStorage(),
+        )
+
+        with self.assertRaises(RuntimeError):
+            failing_service.ingest_cfdi(SAMPLE_XML, persist_to="/tmp/unused")
+
+        retry_service = SATConnectorService(duplicate_detector=detector)
+        event = retry_service.ingest_cfdi(SAMPLE_XML)
+        self.assertEqual(event.metadata.uuid, "12345678-1234-1234-1234-1234567890AB")
 
 
 if __name__ == "__main__":
