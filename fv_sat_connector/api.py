@@ -44,10 +44,11 @@ class SATConnectorService:
     ) -> FiscalEvent:
         """Parse, validate, classify, and optionally persist a CFDI as an FV Fiscal Event.
 
-        Returns the created FiscalEvent. Duplicate UUID protection is reserved before processing,
-        committed only after a successful ingest, and rolled back automatically if processing or
-        persistence fails. When ``persist_to`` is provided, that destination is used for separated
-        filesystem persistence; otherwise, an injected storage backend is used when available.
+        Returns the created FiscalEvent. Duplicate UUID protection is reserved before processing
+        and committed only after a successful ingest. The reservation is released automatically
+        when processing fails or when persistence fails before the duplicate state is committed.
+        When ``persist_to`` is provided, that destination is used for separated filesystem
+        persistence; otherwise, an injected storage backend is used when available.
         """
         metadata, normalized_data = parse_cfdi_xml(xml_bytes)
         validate_metadata(metadata)

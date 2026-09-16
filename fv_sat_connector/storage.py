@@ -8,6 +8,7 @@ import tempfile
 
 from .logs import JsonAuditLogger
 from .models import FiscalEvent
+from .validator import DuplicateCFDIError
 
 
 class FilesystemStorage:
@@ -51,9 +52,10 @@ class FilesystemStorage:
                 encoding="utf-8",
             )
             self.audit_logger.append(staging_dir / "audit" / "log.jsonl", event.audit_trail)
+            if event_dir.exists():
+                raise DuplicateCFDIError(f"CFDI with UUID {event.metadata.uuid} is already persisted")
             staging_dir.rename(event_dir)
         except Exception:
-            shutil.rmtree(event_dir, ignore_errors=True)
             shutil.rmtree(staging_dir, ignore_errors=True)
             raise
         finally:
