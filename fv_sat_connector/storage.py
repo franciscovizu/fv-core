@@ -16,8 +16,8 @@ class FilesystemStorage:
         self.audit_logger = audit_logger or JsonAuditLogger()
 
     def persist(self, event: FiscalEvent, original_document: bytes) -> Path:
-        event_dir = self.base_dir / event.event_id
-        lock_path = self.base_dir / f".{event.event_id}.lock"
+        event_dir = self.base_dir / event.metadata.uuid
+        lock_path = self.base_dir / f".{event.metadata.uuid}.lock"
         self.base_dir.mkdir(parents=True, exist_ok=True)
         try:
             lock_fd = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)

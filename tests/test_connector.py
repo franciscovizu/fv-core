@@ -58,7 +58,7 @@ class SATConnectorServiceTest(unittest.TestCase):
                 actor="unit-test",
                 persist_to=temp_dir,
             )
-            event_dir = Path(temp_dir) / event.event_id
+            event_dir = Path(temp_dir) / event.metadata.uuid
 
             self.assertTrue((event_dir / "original" / "cfdi.xml").is_file())
             self.assertTrue((event_dir / "metadata" / "cfdi.json").is_file())
@@ -95,15 +95,20 @@ class SATConnectorServiceTest(unittest.TestCase):
         self.assertEqual(event.metadata.uuid, "12345678-1234-1234-1234-1234567890AB")
 
     def test_persist_to_overrides_injected_storage_backend(self) -> None:
-        class FailingStorage:
-            def persist(self, event, original_document) -> None:
-                raise RuntimeError("storage unavailable")
+        class RecordingStorage:
+            def __init__(self) -> None:
+                self.calls = 0
 
-        service = SATConnectorService(storage=FailingStorage())
+            def persist(self, event, original_document) -> None:
+                self.calls += 1
+
+        storage = RecordingStorage()
+        service = SATConnectorService(storage=storage)
 
         with tempfile.TemporaryDirectory() as temp_dir:
             event = service.ingest_cfdi(SAMPLE_XML, persist_to=temp_dir)
-            self.assertTrue((Path(temp_dir) / event.event_id / "original" / "cfdi.xml").is_file())
+            self.assertTrue((Path(temp_dir) / event.metadata.uuid / "original" / "cfdi.xml").is_file())
+            self.assertEqual(storage.calls, 0)
 
     def test_injected_storage_is_used_without_persist_to(self) -> None:
         class RecordingStorage:
