@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import shutil
-import uuid
+import tempfile
 
 from .logs import JsonAuditLogger
 from .models import FiscalEvent
@@ -16,7 +16,14 @@ class FilesystemStorage:
 
     def persist(self, event: FiscalEvent, original_document: bytes) -> Path:
         event_dir = self.base_dir / event.event_id
-        staging_dir = self.base_dir / f".{event.event_id}.{uuid.uuid4()}.tmp"
+        self.base_dir.mkdir(parents=True, exist_ok=True)
+        staging_dir = Path(
+            tempfile.mkdtemp(
+                prefix=f".{event.event_id}.",
+                suffix=".tmp",
+                dir=self.base_dir,
+            )
+        )
         try:
             (staging_dir / "original").mkdir(parents=True, exist_ok=True)
             (staging_dir / "metadata").mkdir(exist_ok=True)

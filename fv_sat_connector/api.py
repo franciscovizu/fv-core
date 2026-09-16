@@ -28,6 +28,11 @@ class SATConnectorService:
         self.storage = storage
         self.factory = FiscalEventFactory(self.config)
 
+    def _resolve_storage(self, persist_to: str | Path | None) -> FilesystemStorage | None:
+        if persist_to is not None:
+            return FilesystemStorage(persist_to)
+        return self.storage
+
     def ingest_cfdi(
         self,
         xml_bytes: bytes,
@@ -61,7 +66,7 @@ class SATConnectorService:
                     "immutable_source_preserved": True,
                 },
             )
-            storage = FilesystemStorage(persist_to) if persist_to is not None else self.storage
+            storage = self._resolve_storage(persist_to)
             if storage is not None:
                 storage.persist(event, xml_bytes)
             self.duplicate_detector.commit(metadata.uuid)
