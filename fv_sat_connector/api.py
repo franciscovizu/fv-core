@@ -5,6 +5,7 @@ from pathlib import Path
 from .ai_agent import FiscalAIAgent
 from .config import ConnectorConfig
 from .fiscal_event import FiscalEventFactory
+from .models import FiscalEvent
 from .odoo import OdooAdapter
 from .parser import parse_cfdi_xml
 from .storage import FilesystemStorage
@@ -40,7 +41,7 @@ class SATConnectorService:
         source: str = "sat",
         actor: str = "connector",
         persist_to: str | Path | None = None,
-    ):
+    ) -> FiscalEvent:
         """Parse, validate, classify, and optionally persist a CFDI as an FV Fiscal Event.
 
         Returns the created FiscalEvent. Duplicate UUID protection is reserved before processing,

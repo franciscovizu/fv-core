@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 import shutil
 import tempfile
@@ -16,7 +17,13 @@ class FilesystemStorage:
 
     def persist(self, event: FiscalEvent, original_document: bytes) -> Path:
         event_dir = self.base_dir / event.event_id
+        lock_path = self.base_dir / f".{event.event_id}.lock"
         self.base_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            lock_fd = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.close(lock_fd)
+        except FileExistsError as exc:
+            raise FileExistsError(f"Event directory is being persisted: {event_dir}") from exc
         staging_dir = Path(
             tempfile.mkdtemp(
                 prefix=f".{event.event_id}.",
@@ -49,4 +56,6 @@ class FilesystemStorage:
             shutil.rmtree(event_dir, ignore_errors=True)
             shutil.rmtree(staging_dir, ignore_errors=True)
             raise
+        finally:
+            lock_path.unlink(missing_ok=True)
         return event_dir

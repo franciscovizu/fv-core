@@ -105,6 +105,23 @@ class SATConnectorServiceTest(unittest.TestCase):
             event = service.ingest_cfdi(SAMPLE_XML, persist_to=temp_dir)
             self.assertTrue((Path(temp_dir) / event.event_id / "original" / "cfdi.xml").is_file())
 
+    def test_injected_storage_is_used_without_persist_to(self) -> None:
+        class RecordingStorage:
+            def __init__(self) -> None:
+                self.calls = []
+
+            def persist(self, event, original_document) -> None:
+                self.calls.append((event, original_document))
+
+        storage = RecordingStorage()
+        service = SATConnectorService(storage=storage)
+
+        event = service.ingest_cfdi(SAMPLE_XML)
+
+        self.assertEqual(len(storage.calls), 1)
+        self.assertIs(storage.calls[0][0], event)
+        self.assertEqual(storage.calls[0][1], SAMPLE_XML)
+
 
 if __name__ == "__main__":
     unittest.main()
