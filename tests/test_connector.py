@@ -88,11 +88,22 @@ class SATConnectorServiceTest(unittest.TestCase):
         )
 
         with self.assertRaises(RuntimeError):
-            failing_service.ingest_cfdi(SAMPLE_XML, persist_to="/tmp/unused")
+            failing_service.ingest_cfdi(SAMPLE_XML)
 
         retry_service = SATConnectorService(duplicate_detector=detector)
         event = retry_service.ingest_cfdi(SAMPLE_XML)
         self.assertEqual(event.metadata.uuid, "12345678-1234-1234-1234-1234567890AB")
+
+    def test_persist_to_overrides_injected_storage_backend(self) -> None:
+        class FailingStorage:
+            def persist(self, event, original_document) -> None:
+                raise RuntimeError("storage unavailable")
+
+        service = SATConnectorService(storage=FailingStorage())
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            event = service.ingest_cfdi(SAMPLE_XML, persist_to=temp_dir)
+            self.assertTrue((Path(temp_dir) / event.event_id / "original" / "cfdi.xml").is_file())
 
 
 if __name__ == "__main__":

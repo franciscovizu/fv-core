@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 import shutil
 import uuid
@@ -17,8 +18,6 @@ class FilesystemStorage:
     def persist(self, event: FiscalEvent, original_document: bytes) -> Path:
         event_dir = self.base_dir / event.event_id
         staging_dir = self.base_dir / f".{event.event_id}.{uuid.uuid4()}.tmp"
-        if event_dir.exists():
-            raise FileExistsError(f"Event directory already exists: {event_dir}")
         try:
             (staging_dir / "original").mkdir(parents=True, exist_ok=True)
             (staging_dir / "metadata").mkdir(exist_ok=True)
@@ -39,8 +38,12 @@ class FilesystemStorage:
                 encoding="utf-8",
             )
             self.audit_logger.append(staging_dir / "audit" / "log.jsonl", event.audit_trail)
-            staging_dir.replace(event_dir)
+            os.mkdir(event_dir)
+            for child in staging_dir.iterdir():
+                child.rename(event_dir / child.name)
+            staging_dir.rmdir()
         except Exception:
+            shutil.rmtree(event_dir, ignore_errors=True)
             shutil.rmtree(staging_dir, ignore_errors=True)
             raise
         return event_dir

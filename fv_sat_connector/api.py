@@ -36,6 +36,13 @@ class SATConnectorService:
         actor: str = "connector",
         persist_to: str | Path | None = None,
     ):
+        """Parse, validate, classify, and optionally persist a CFDI as an FV Fiscal Event.
+
+        Returns the created FiscalEvent. Duplicate UUID protection is reserved before processing,
+        committed only after a successful ingest, and rolled back automatically if processing or
+        persistence fails. When ``persist_to`` is provided, that destination is used for separated
+        filesystem persistence; otherwise, an injected storage backend is used when available.
+        """
         metadata, normalized_data = parse_cfdi_xml(xml_bytes)
         validate_metadata(metadata)
         self.duplicate_detector.reserve(metadata.uuid)
@@ -54,8 +61,8 @@ class SATConnectorService:
                     "immutable_source_preserved": True,
                 },
             )
-            if persist_to is not None:
-                storage = self.storage or FilesystemStorage(persist_to)
+            storage = FilesystemStorage(persist_to) if persist_to is not None else self.storage
+            if storage is not None:
                 storage.persist(event, xml_bytes)
             self.duplicate_detector.commit(metadata.uuid)
             return event
