@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 import shutil
 import uuid
@@ -38,10 +37,7 @@ class FilesystemStorage:
                 encoding="utf-8",
             )
             self.audit_logger.append(staging_dir / "audit" / "log.jsonl", event.audit_trail)
-            os.mkdir(event_dir)
-            for child in staging_dir.iterdir():
-                child.rename(event_dir / child.name)
-            staging_dir.rmdir()
+            staging_dir.rename(event_dir)
         except Exception:
             shutil.rmtree(event_dir, ignore_errors=True)
             shutil.rmtree(staging_dir, ignore_errors=True)
