@@ -44,6 +44,8 @@ class SATConnectorServiceTest(unittest.TestCase):
         self.assertTrue(event.document_sha256)
         self.assertTrue(event.operation_id.startswith("VIZF850813D46-"))
         self.assertEqual(event.processing_result["classification"]["operation_type"], "ingreso")
+        self.assertEqual(event.processing_result["odoo_payload"]["partner_vat"], "BBB010101BBB")
+        self.assertEqual(event.processing_result["odoo_payload"]["company_vat"], "AAA010101AAA")
         self.assertTrue(event.processing_result["immutable_source_preserved"])
 
     def test_persist_keeps_original_metadata_normalized_processing_and_audit_separate(self) -> None:

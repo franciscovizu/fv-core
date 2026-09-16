@@ -38,23 +38,27 @@ class SATConnectorService:
     ):
         metadata, normalized_data = parse_cfdi_xml(xml_bytes)
         validate_metadata(metadata)
-        self.duplicate_detector.check_available(metadata.uuid)
-        classification = self.ai_agent.analyze(metadata)
-        odoo_payload = self.odoo_adapter.prepare_document(metadata, normalized_data, classification)
-        event = self.factory.create(
-            source=source,
-            actor=actor,
-            original_document=xml_bytes,
-            metadata=metadata,
-            normalized_data=normalized_data,
-            processing_result={
-                "classification": classification,
-                "odoo_payload": odoo_payload,
-                "immutable_source_preserved": True,
-            },
-        )
-        if persist_to is not None:
-            storage = self.storage or FilesystemStorage(persist_to)
-            storage.persist(event, xml_bytes)
-        self.duplicate_detector.register(metadata.uuid)
-        return event
+        self.duplicate_detector.reserve(metadata.uuid)
+        try:
+            classification = self.ai_agent.analyze(metadata)
+            odoo_payload = self.odoo_adapter.prepare_document(metadata, normalized_data, classification)
+            event = self.factory.create(
+                source=source,
+                actor=actor,
+                original_document=xml_bytes,
+                metadata=metadata,
+                normalized_data=normalized_data,
+                processing_result={
+                    "classification": classification,
+                    "odoo_payload": odoo_payload,
+                    "immutable_source_preserved": True,
+                },
+            )
+            if persist_to is not None:
+                storage = self.storage or FilesystemStorage(persist_to)
+                storage.persist(event, xml_bytes)
+            self.duplicate_detector.commit(metadata.uuid)
+            return event
+        except Exception:
+            self.duplicate_detector.release(metadata.uuid)
+            raise

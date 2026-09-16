@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import shutil
+import uuid
 
 from .logs import JsonAuditLogger
 from .models import FiscalEvent
@@ -15,9 +16,7 @@ class FilesystemStorage:
 
     def persist(self, event: FiscalEvent, original_document: bytes) -> Path:
         event_dir = self.base_dir / event.event_id
-        staging_dir = self.base_dir / f".{event.event_id}.tmp"
-        if staging_dir.exists():
-            shutil.rmtree(staging_dir)
+        staging_dir = self.base_dir / f".{event.event_id}.{uuid.uuid4()}.tmp"
         if event_dir.exists():
             raise FileExistsError(f"Event directory already exists: {event_dir}")
         try:

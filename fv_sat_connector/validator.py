@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+import threading
 
 from .models import CfdiMetadata
 
@@ -15,18 +16,28 @@ class DuplicateCFDIError(ValidationError):
 
 class DuplicateDetector:
     def __init__(self, existing_uuids: Iterable[str] = ()) -> None:
+        self._lock = threading.Lock()
         self._seen = set(existing_uuids)
+        self._reserved: set[str] = set()
 
-    def check_available(self, uuid: str) -> None:
-        if uuid in self._seen:
-            raise DuplicateCFDIError(f"CFDI with UUID {uuid} is already registered")
+    def reserve(self, uuid: str) -> None:
+        with self._lock:
+            if uuid in self._seen or uuid in self._reserved:
+                raise DuplicateCFDIError(f"CFDI with UUID {uuid} is already registered")
+            self._reserved.add(uuid)
 
-    def register(self, uuid: str) -> None:
-        self._seen.add(uuid)
+    def commit(self, uuid: str) -> None:
+        with self._lock:
+            self._reserved.discard(uuid)
+            self._seen.add(uuid)
+
+    def release(self, uuid: str) -> None:
+        with self._lock:
+            self._reserved.discard(uuid)
 
     def ensure_unique(self, uuid: str) -> None:
-        self.check_available(uuid)
-        self.register(uuid)
+        self.reserve(uuid)
+        self.commit(uuid)
 
 
 def validate_metadata(metadata: CfdiMetadata) -> None:

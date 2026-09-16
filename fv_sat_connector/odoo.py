@@ -15,11 +15,12 @@ class OdooAdapter:
         normalized_data: dict[str, object],
         classification: dict[str, object],
     ) -> dict[str, object]:
+        issued = classification.get("direction") == "issued"
         return {
             "target_version": self.target_version,
             "external_uuid": metadata.uuid,
-            "partner_vat": metadata.rfc_emisor,
-            "company_vat": metadata.rfc_receptor,
+            "partner_vat": metadata.rfc_receptor if issued else metadata.rfc_emisor,
+            "company_vat": metadata.rfc_emisor if issued else metadata.rfc_receptor,
             "move_type": classification["suggested_move_type"],
             "currency": normalized_data["currency"],
             "invoice_date": normalized_data["issued_at"],
