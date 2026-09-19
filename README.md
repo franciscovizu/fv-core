@@ -8,6 +8,17 @@
 
 FV® Core es la matriz independiente que registra y gobierna los proyectos FV® como módulos separados.
 
+## Referencia de Copyright de Estados Unidos
+
+- **Obra:** FV® Core
+- **Número de expediente / service request:** `1-15263846551`
+- **Solicitud y pago recibidos:** 18 de septiembre de 2026
+- **Depósito digital recibido:** 19 de septiembre de 2026
+- **Estado documentado:** presentación completa para revisión; sin acciones de carga pendientes
+- **Certificado final:** pendiente de resolución por la U.S. Copyright Office
+
+La evidencia bancaria y los archivos privados del depósito no se publican en este repositorio.
+
 ## Integración real
 
 1. **José Francisco Villaseñor Zúñiga** define la visión, autoriza decisiones y conserva la autoría humana.

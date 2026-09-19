@@ -177,5 +177,16 @@
       "evidence_level": "evidence",
       "description": "Presupuestos, importaciones, nómina y controles financieros."
     }
-  ]
+  ],
+  "copyright_record": {
+    "jurisdiction": "United States Copyright Office",
+    "work_title": "FV® Core",
+    "case_number": "1-15263846551",
+    "application_and_payment_received": "2026-09-18",
+    "deposit_received": "2026-09-19",
+    "submission_status": "complete-for-examination",
+    "pending_action": "none",
+    "final_registration_status": "pending-agency-determination",
+    "privacy_note": "Bank records and private deposit files are not published in this repository."
+  }
 }
