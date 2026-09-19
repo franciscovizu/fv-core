@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FV® Core module manifest",
+  "type": "object",
+  "required": [
+    "fv_id",
+    "id",
+    "name",
+    "human_author",
+    "brand_root",
+    "status",
+    "structural_test",
+    "functional_test",
+    "description"
+  ],
+  "properties": {
+    "fv_id": {
+      "const": "VIZF850813D46"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3
+    },
+    "human_author": {
+      "const": "José Francisco Villaseñor Zúñiga"
+    },
+    "brand_root": {
+      "const": "FV®"
+    },
+    "status": {
+      "enum": [
+        "registered",
+        "structurally_validated",
+        "functionally_tested"
+      ]
+    },
+    "structural_test": {
+      "enum": [
+        "pending-ci",
+        "passed",
+        "failed"
+      ]
+    },
+    "functional_test": {
+      "enum": [
+        "not-run",
+        "passed",
+        "failed"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10
+    }
+  },
+  "additionalProperties": true
+}

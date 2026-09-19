@@ -1,0 +1,16 @@
+{
+  "fv_id": "VIZF850813D46",
+  "id": "erp-odoo",
+  "name": "FV® ERP | Odoo 18→20",
+  "human_author": "José Francisco Villaseñor Zúñiga",
+  "brand_root": "FV®",
+  "technology_collaboration": "FV® & IA",
+  "status": "registered",
+  "structural_test": "pending-ci",
+  "functional_test": "not-run",
+  "evidence_level": "concept-and-evidence",
+  "description": "Núcleo administrativo y financiero desacoplado de proveedores.",
+  "integration_state": "isolated",
+  "connection_rule": "No conectar hasta instrucción expresa del autor humano.",
+  "updated_on": "2026-09-19"
+}

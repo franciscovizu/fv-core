@@ -1,0 +1,22 @@
+name: Validar módulos FV Core
+on:
+  push:
+    paths:
+      - "core/**"
+      - "modules/**"
+      - "scripts/validate_modules.py"
+      - ".github/workflows/validate-modules.yml"
+  pull_request:
+    paths:
+      - "core/**"
+      - "modules/**"
+      - "scripts/validate_modules.py"
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/validate_modules.py

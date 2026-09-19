@@ -1,0 +1,16 @@
+{
+  "fv_id": "VIZF850813D46",
+  "id": "finance-operations",
+  "name": "FV® Operaciones Financieras",
+  "human_author": "José Francisco Villaseñor Zúñiga",
+  "brand_root": "FV®",
+  "technology_collaboration": "FV® & IA",
+  "status": "registered",
+  "structural_test": "pending-ci",
+  "functional_test": "not-run",
+  "evidence_level": "evidence",
+  "description": "Presupuestos, importaciones, nómina y controles financieros.",
+  "integration_state": "isolated",
+  "connection_rule": "No conectar hasta instrucción expresa del autor humano.",
+  "updated_on": "2026-09-19"
+}

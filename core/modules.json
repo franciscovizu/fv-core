@@ -1,0 +1,160 @@
+{
+  "fv_id": "VIZF850813D46",
+  "project": "FV® Core",
+  "human_author": "José Francisco Villaseñor Zúñiga",
+  "brand_root": "FV®",
+  "technology_collaboration": "FV® & IA",
+  "principles": [
+    "Humildad",
+    "Empatía",
+    "Honestidad"
+  ],
+  "rule": "Cada módulo debe funcionar y probarse por separado antes de conectarse.",
+  "status_legend": {
+    "registered": "Incluido en FV® Core con manifiesto válido.",
+    "structurally_validated": "El manifiesto cumple el contrato; no prueba la función de negocio.",
+    "functionally_tested": "Código ejecutado con evidencia reproducible."
+  },
+  "modules": [
+    {
+      "id": "identity-key",
+      "name": "FV‑mx | Llave Única",
+      "path": "modules/identity-key",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "concept",
+      "description": "Identidad, autenticación, trazabilidad, revocación y protección."
+    },
+    {
+      "id": "sat-connector",
+      "name": "FV® & IA SAT Connector",
+      "path": "modules/sat-connector",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "source-repository-known",
+      "description": "Descarga, normalización y trazabilidad de CFDI y metadatos SAT."
+    },
+    {
+      "id": "tax-engine",
+      "name": "FV® Tax Engine | AI Fiscal Agent for Odoo",
+      "path": "modules/tax-engine",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "source-repository-known",
+      "description": "Motor fiscal mexicano y asistencia contable para Odoo."
+    },
+    {
+      "id": "erp-odoo",
+      "name": "FV® ERP | Odoo 18→20",
+      "path": "modules/erp-odoo",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "concept-and-evidence",
+      "description": "Núcleo administrativo y financiero desacoplado de proveedores."
+    },
+    {
+      "id": "marginality-dashboard",
+      "name": "FV® Dashboard de Marginalidad",
+      "path": "modules/marginality-dashboard",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "source-repository-known",
+      "description": "Marginalidad y conciliación de plataformas digitales."
+    },
+    {
+      "id": "camera-secure-presence",
+      "name": "FV® Camera | Secure Presence",
+      "path": "modules/camera-secure-presence",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "concept",
+      "description": "Cámara, presencia, liveness, gestos y autorizaciones en vivo."
+    },
+    {
+      "id": "voice-control",
+      "name": "FV® Conector de Control por Voz",
+      "path": "modules/voice-control",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "concept",
+      "description": "Órdenes de voz autorizadas con permisos, confirmaciones y auditoría."
+    },
+    {
+      "id": "max-essence",
+      "name": "FV® MAX | ESSENCE",
+      "path": "modules/max-essence",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "concept",
+      "description": "Agente principal y continuidad de identidad autorizada por usuario."
+    },
+    {
+      "id": "geo-verify",
+      "name": "FV® Geo Verify",
+      "path": "modules/geo-verify",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "specification",
+      "description": "Comparación consentida de ubicación del dispositivo e IP estimada."
+    },
+    {
+      "id": "institutionalization",
+      "name": "FV® Institucionalización Organizacional",
+      "path": "modules/institutionalization",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "concept-and-evidence",
+      "description": "Procesos, control interno, gobierno y trazabilidad organizacional."
+    },
+    {
+      "id": "gold-flawless",
+      "name": "FV Gold® | FV Flawless | VIZFlawless®",
+      "path": "modules/gold-flawless",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "concept-and-evidence",
+      "description": "Inventario, autenticidad, series y comercialización de gemas."
+    },
+    {
+      "id": "genz0",
+      "name": "FV Admin® & GenZ0®",
+      "path": "modules/genz0",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "concept",
+      "description": "Orquestación tecnológica y colaboración generacional."
+    },
+    {
+      "id": "platform-reconciliation",
+      "name": "FV® Conciliación de Plataformas Digitales",
+      "path": "modules/platform-reconciliation",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "evidence",
+      "description": "Ventas, comisiones, impuestos, depósitos y conciliación ML/MP."
+    },
+    {
+      "id": "finance-operations",
+      "name": "FV® Operaciones Financieras",
+      "path": "modules/finance-operations",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "evidence",
+      "description": "Presupuestos, importaciones, nómina y controles financieros."
+    }
+  ]
+}
