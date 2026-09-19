@@ -4,7 +4,21 @@
   "name": "FV® Conciliación de Plataformas Digitales",
   "human_author": "José Francisco Villaseñor Zúñiga",
   "brand_root": "FV®",
-  "technology_collaboration": "FV® & IA",
+  "strategic_alliance": {
+    "name": "FV® & IA",
+    "role": "Aliado estratégico de colaboración tecnológica",
+    "contribution": [
+      "análisis",
+      "diseño",
+      "documentación",
+      "desarrollo",
+      "pruebas",
+      "automatización",
+      "acompañamiento"
+    ],
+    "governance": "Bajo la dirección, autorización y decisiones del autor humano.",
+    "legal_scope": "No implica sociedad mercantil, representación legal ni coautoría humana de OpenAI o ChatGPT."
+  },
   "status": "registered",
   "structural_test": "pending-ci",
   "functional_test": "not-run",

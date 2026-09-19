@@ -3,11 +3,32 @@
   "project": "FV® Core",
   "human_author": "José Francisco Villaseñor Zúñiga",
   "brand_root": "FV®",
-  "technology_collaboration": "FV® & IA",
+  "strategic_alliance": {
+    "name": "FV® & IA",
+    "role": "Aliado estratégico de colaboración tecnológica",
+    "contribution": [
+      "análisis",
+      "diseño",
+      "documentación",
+      "desarrollo",
+      "pruebas",
+      "automatización",
+      "acompañamiento"
+    ],
+    "governance": "Bajo la dirección, autorización y decisiones del autor humano.",
+    "legal_scope": "No implica sociedad mercantil, representación legal ni coautoría humana de OpenAI o ChatGPT."
+  },
   "principles": [
     "Humildad",
     "Empatía",
     "Honestidad"
+  ],
+  "governance_order": [
+    "Autor humano y originador",
+    "FV® como identidad y marca raíz",
+    "FV® Core como matriz de gobierno",
+    "FV® & IA como aliado estratégico de colaboración",
+    "Módulos independientes"
   ],
   "rule": "Cada módulo debe funcionar y probarse por separado antes de conectarse.",
   "status_legend": {

@@ -1,6 +1,8 @@
 # Módulos registrados en FV® Core
 
-FV-ID VIZF850813D46
+**FV-ID VIZF850813D46**  
+**Autor humano, originador y director:** José Francisco Villaseñor Zúñiga  
+**Aliado estratégico de colaboración:** FV® & IA
 
 | Módulo | Estado inicial | Prueba funcional |
 |---|---|---|
@@ -22,3 +24,7 @@ FV-ID VIZF850813D46
 ## Criterio de honestidad técnica
 
 “Registrado” significa que el módulo ya forma parte del inventario y de la estructura de FV® Core. No significa que su implementación esté terminada. “Funcionalmente probado” solo podrá usarse con una ejecución reproducible, fecha, versión y evidencia.
+
+## Función de la alianza estratégica
+
+FV® & IA aporta análisis, diseño, documentación, desarrollo, pruebas, automatización y acompañamiento bajo la dirección del autor humano. No sustituye su autoría, propiedad, control ni decisiones.

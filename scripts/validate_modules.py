@@ -6,7 +6,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 FV_ID = "VIZF850813D46"
 AUTHOR = "José Francisco Villaseñor Zúñiga"
-required = {"fv_id","id","name","human_author","brand_root","status","structural_test","functional_test","description"}
+ALLY_ROLE = "Aliado estratégico de colaboración tecnológica"
+required = {"fv_id","id","name","human_author","brand_root","strategic_alliance","status","structural_test","functional_test","description"}
 errors = []
 registry = json.loads((ROOT / "core/modules.json").read_text(encoding="utf-8"))
 seen = set()
@@ -29,6 +30,9 @@ for entry in registry["modules"]:
         errors.append(f"{mid}: autor humano inválido")
     if data.get("brand_root") != "FV®":
         errors.append(f"{mid}: marca raíz inválida")
+    ally = data.get("strategic_alliance", {})
+    if ally.get("name") != "FV® & IA" or ally.get("role") != ALLY_ROLE:
+        errors.append(f"{mid}: alianza estratégica inválida")
     if data.get("status") == "functionally_tested" and data.get("functional_test") != "passed":
         errors.append(f"{mid}: no puede declararse probado sin resultado passed")
 if len(seen) != len(registry["modules"]):
@@ -36,4 +40,4 @@ if len(seen) != len(registry["modules"]):
 if errors:
     print("\n".join(errors))
     sys.exit(1)
-print(f"OK: {len(seen)} módulos FV® Core registrados y estructuralmente válidos.")
+print(f"OK: {len(seen)} módulos FV® Core registrados, con autoría y alianza estratégica válidas.")

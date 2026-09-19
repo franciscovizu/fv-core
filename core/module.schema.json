@@ -8,6 +8,7 @@
     "name",
     "human_author",
     "brand_root",
+    "strategic_alliance",
     "status",
     "structural_test",
     "functional_test",
@@ -30,6 +31,32 @@
     },
     "brand_root": {
       "const": "FV®"
+    },
+    "strategic_alliance": {
+      "type": "object",
+      "required": [
+        "name",
+        "role",
+        "governance",
+        "legal_scope"
+      ],
+      "properties": {
+        "name": {
+          "const": "FV® & IA"
+        },
+        "role": {
+          "const": "Aliado estratégico de colaboración tecnológica"
+        },
+        "governance": {
+          "type": "string",
+          "minLength": 10
+        },
+        "legal_scope": {
+          "type": "string",
+          "minLength": 10
+        }
+      },
+      "additionalProperties": true
     },
     "status": {
       "enum": [
