@@ -176,6 +176,16 @@
       "functional_test": "not-run",
       "evidence_level": "evidence",
       "description": "Presupuestos, importaciones, nómina y controles financieros."
+    },
+    {
+      "id": "youtube-connector",
+      "name": "FV® YouTube Connector",
+      "path": "modules/youtube-connector",
+      "status": "registered",
+      "structural_test": "pending-ci",
+      "functional_test": "not-run",
+      "evidence_level": "implementation-with-offline-tests",
+      "description": "Conexión autorizada con YouTube Data API y YouTube Analytics para identidad, videos y métricas del canal oficial."
     }
   ],
   "copyright_record": {

@@ -20,3 +20,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/validate_modules.py
+      - name: Probar FV YouTube Connector sin credenciales
+        env:
+          PYTHONPATH: modules/youtube-connector/src
+        run: python -m unittest discover -s modules/youtube-connector/tests -v

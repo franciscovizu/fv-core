@@ -1,0 +1,42 @@
+{
+  "fv_id": "VIZF850813D46",
+  "id": "youtube-connector",
+  "name": "FV® YouTube Connector",
+  "human_author": "José Francisco Villaseñor Zúñiga",
+  "brand_root": "FV®",
+  "strategic_alliance": {
+    "name": "FV® & IA",
+    "role": "Aliado estratégico de colaboración tecnológica",
+    "contribution": [
+      "análisis",
+      "diseño",
+      "documentación",
+      "desarrollo",
+      "pruebas",
+      "automatización",
+      "acompañamiento"
+    ],
+    "governance": "Bajo la dirección, autorización y decisiones del autor humano.",
+    "legal_scope": "No implica sociedad mercantil, representación legal ni coautoría humana de OpenAI o ChatGPT."
+  },
+  "status": "registered",
+  "structural_test": "pending-ci",
+  "functional_test": "not-run",
+  "evidence_level": "implementation-with-offline-tests",
+  "description": "Conexión autorizada con YouTube Data API y YouTube Analytics para identidad, videos y métricas del canal oficial.",
+  "integration_state": "isolated",
+  "connection_rule": "No conectar a otros módulos hasta instrucción expresa del autor humano.",
+  "official_channel_handle": "@franciscovizu",
+  "security": {
+    "authentication": "Google OAuth 2.0 con consentimiento del titular",
+    "secrets": "Variables de entorno o gestor de secretos; nunca en Git",
+    "initial_access": "Solo lectura",
+    "prohibited": [
+      "contraseñas",
+      "códigos de verificación",
+      "tokens en archivos",
+      "acciones de escritura sin autorización"
+    ]
+  },
+  "updated_on": "2026-09-19"
+}
