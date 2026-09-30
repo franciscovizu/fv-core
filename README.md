@@ -42,3 +42,19 @@ Los módulos están incluidos en `modules/` y registrados en `core/modules.json`
 La validación estructural **no equivale** a una prueba funcional del negocio.
 
 Arquitectura de evolución: **FV® Connector → FV® Core → FV® ERP**.
+
+Copyright © 2026 Jose Francisco Villaseñor Zuñiga. All rights reserved.
+Project: FV® Core
+U.S. Copyright Office Case Number: 1-15263846551
+
+This software and its associated source code, documentation, and assets are the 
+exclusive intellectual property of Jose Francisco Villaseñor Zuñiga. 
+
+Strictly Prohibited:
+- Any unauthorized copying, modification, distribution, or reverse engineering 
+  of this source code, in whole or in part, without explicit written permission 
+  from the copyright holder.
+- Commercial or non-commercial reuse of this architecture under any circumstances 
+  unless covered by a separate, signed enterprise licensing agreement.
+
+All rights reserved.
